@@ -3,4 +3,4 @@ gevent
 eventlet
 coverage
 pytest
-pytest-cov
+pytest-cov==2.10.1
