@@ -1,6 +1,6 @@
 aiohttp
 gevent
-eventlet
+eventlet==0.30.1
 coverage
 pytest
 pytest-cov
