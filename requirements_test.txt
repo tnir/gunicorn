@@ -1,4 +1,4 @@
-aiohttp
+aiohttp==3.8.1
 gevent
 eventlet
 coverage
