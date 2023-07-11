@@ -1,5 +1,5 @@
 aiohttp
-gevent
+gevent==23.7.0
 eventlet
 coverage
 pytest
