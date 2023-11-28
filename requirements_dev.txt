@@ -1,4 +1,4 @@
 -r requirements_test.txt
 
 sphinx
-sphinx_rtd_theme
+sphinx_rtd_theme==2.0.0
