@@ -1,6 +1,6 @@
 gevent
 eventlet
 cryptography
-coverage
+coverage==7.3.3
 pytest
 pytest-cov
