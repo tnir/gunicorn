@@ -1,5 +1,5 @@
 gevent
-eventlet
+eventlet==0.34.1
 cryptography
 coverage
 pytest
