@@ -6,4 +6,4 @@
 setuptools>=68.0
 
 sphinx
-sphinx_rtd_theme
+sphinx_rtd_theme==3.0.1
