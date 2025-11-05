@@ -1,4 +1,4 @@
-gevent
+gevent==25.8.1
 eventlet
 coverage
 pytest>=7.2.0
