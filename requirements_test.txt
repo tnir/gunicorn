@@ -2,4 +2,4 @@ gevent
 eventlet
 coverage
 pytest>=7.2.0
-pytest-cov
+pytest-cov==6.3.0
