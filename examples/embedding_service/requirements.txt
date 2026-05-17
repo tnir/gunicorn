@@ -1,5 +1,5 @@
 sentence-transformers
-fastapi
+fastapi==0.136.1
 pydantic
 requests
 numpy
