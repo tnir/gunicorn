@@ -8,42 +8,36 @@
       
       
       
-        <link rel="canonical" href="https://gunicorn.org/">
+        <link rel="canonical" href="https://gunicorn.org/signals/">
       
       
+        <link rel="prev" href="../uwsgi/">
       
-        <link rel="next" href="quickstart/">
+      
+        <link rel="next" href="../instrumentation/">
       
       
         
       
       
-      <link rel="icon" href="assets/gunicorn.svg">
+      <link rel="icon" href="../assets/gunicorn.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
-<title>Gunicorn - Python WSGI HTTP Server for UNIX</title>
-
+      
+        <title>Signals - Gunicorn</title>
+      
     
-
-      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
 
     
-<link rel="stylesheet" href="assets/stylesheets/home.css">
-<style>
-  /* Hide sidebar on desktop, keep drawer for mobile/tablet */
-  @media screen and (min-width: 76.25em) {
-    .md-sidebar--primary { display: none; }
-  }
-  .md-sidebar--secondary { display: none; }
-</style>
-
     
       
     
@@ -57,11 +51,11 @@
       
     
     
-      <link rel="stylesheet" href="styles/overrides.css">
+      <link rel="stylesheet" href="../styles/overrides.css">
     
-      <link rel="stylesheet" href="assets/stylesheets/home.css">
+      <link rel="stylesheet" href="../assets/stylesheets/home.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -85,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#signal-handling" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -97,9 +96,9 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Gunicorn" class="md-header__button md-logo" aria-label="Gunicorn" data-md-component="logo">
+    <a href=".." title="Gunicorn" class="md-header__button md-logo" aria-label="Gunicorn" data-md-component="logo">
       
-  <img src="assets/gunicorn.svg" alt="logo">
+  <img src="../assets/gunicorn.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -116,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Gunicorn - Python WSGI HTTP Server
+              Signals
             
           </span>
         </div>
@@ -226,11 +225,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
         
   
   
@@ -251,7 +248,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="quickstart/" class="md-tabs__link">
+        <a href="../quickstart/" class="md-tabs__link">
           
   
   
@@ -267,11 +264,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="deploy/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../deploy/" class="md-tabs__link">
           
   
   
@@ -291,7 +290,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="community/" class="md-tabs__link">
+        <a href="../community/" class="md-tabs__link">
           
   
   
@@ -309,7 +308,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="sponsor/" class="md-tabs__link">
+      <a href="../sponsor/" class="md-tabs__link">
         
   
   
@@ -330,7 +329,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="reference/settings/" class="md-tabs__link">
+        <a href="../reference/settings/" class="md-tabs__link">
           
   
   
@@ -350,7 +349,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="news/" class="md-tabs__link">
+        <a href="../news/" class="md-tabs__link">
           
   
   
@@ -372,14 +371,11 @@
     <div class="md-container" data-md-component="container">
       
       
-
         
       
-
       <main class="md-main" data-md-component="main">
         <div class="md-main__inner md-grid">
           
-  
             
               
               <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
@@ -395,9 +391,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Gunicorn" class="md-nav__button md-logo" aria-label="Gunicorn" data-md-component="logo">
+    <a href=".." title="Gunicorn" class="md-nav__button md-logo" aria-label="Gunicorn" data-md-component="logo">
       
-  <img src="assets/gunicorn.svg" alt="logo">
+  <img src="../assets/gunicorn.svg" alt="logo">
 
     </a>
     Gunicorn
@@ -421,17 +417,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -447,7 +436,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -511,7 +499,7 @@
   
   
     <li class="md-nav__item">
-      <a href="quickstart/" class="md-nav__link">
+      <a href="../quickstart/" class="md-nav__link">
         
   
   
@@ -539,7 +527,7 @@
   
   
     <li class="md-nav__item">
-      <a href="install/" class="md-nav__link">
+      <a href="../install/" class="md-nav__link">
         
   
   
@@ -567,7 +555,7 @@
   
   
     <li class="md-nav__item">
-      <a href="run/" class="md-nav__link">
+      <a href="../run/" class="md-nav__link">
         
   
   
@@ -595,7 +583,7 @@
   
   
     <li class="md-nav__item">
-      <a href="configure/" class="md-nav__link">
+      <a href="../configure/" class="md-nav__link">
         
   
   
@@ -627,26 +615,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -664,7 +657,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -682,7 +675,7 @@
   
   
     <li class="md-nav__item">
-      <a href="deploy/" class="md-nav__link">
+      <a href="../deploy/" class="md-nav__link">
         
   
   
@@ -710,7 +703,7 @@
   
   
     <li class="md-nav__item">
-      <a href="guides/docker/" class="md-nav__link">
+      <a href="../guides/docker/" class="md-nav__link">
         
   
   
@@ -738,7 +731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="guides/http2/" class="md-nav__link">
+      <a href="../guides/http2/" class="md-nav__link">
         
   
   
@@ -766,7 +759,7 @@
   
   
     <li class="md-nav__item">
-      <a href="asgi/" class="md-nav__link">
+      <a href="../asgi/" class="md-nav__link">
         
   
   
@@ -794,7 +787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="dirty/" class="md-nav__link">
+      <a href="../dirty/" class="md-nav__link">
         
   
   
@@ -822,7 +815,7 @@
   
   
     <li class="md-nav__item">
-      <a href="guides/gunicornc/" class="md-nav__link">
+      <a href="../guides/gunicornc/" class="md-nav__link">
         
   
   
@@ -850,7 +843,7 @@
   
   
     <li class="md-nav__item">
-      <a href="uwsgi/" class="md-nav__link">
+      <a href="../uwsgi/" class="md-nav__link">
         
   
   
@@ -875,10 +868,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="signals/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signals
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -894,6 +914,70 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#master-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Master process
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worker-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worker process
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reload-the-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reload the configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrading-to-a-new-binary-on-the-fly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upgrading to a new binary on the fly
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -906,7 +990,7 @@
   
   
     <li class="md-nav__item">
-      <a href="instrumentation/" class="md-nav__link">
+      <a href="../instrumentation/" class="md-nav__link">
         
   
   
@@ -934,7 +1018,7 @@
   
   
     <li class="md-nav__item">
-      <a href="custom/" class="md-nav__link">
+      <a href="../custom/" class="md-nav__link">
         
   
   
@@ -962,7 +1046,7 @@
   
   
     <li class="md-nav__item">
-      <a href="design/" class="md-nav__link">
+      <a href="../design/" class="md-nav__link">
         
   
   
@@ -1049,7 +1133,7 @@
   
   
     <li class="md-nav__item">
-      <a href="community/" class="md-nav__link">
+      <a href="../community/" class="md-nav__link">
         
   
   
@@ -1077,7 +1161,7 @@
   
   
     <li class="md-nav__item">
-      <a href="faq/" class="md-nav__link">
+      <a href="../faq/" class="md-nav__link">
         
   
   
@@ -1105,7 +1189,7 @@
   
   
     <li class="md-nav__item">
-      <a href="sponsor/" class="md-nav__link">
+      <a href="../sponsor/" class="md-nav__link">
         
   
   
@@ -1140,7 +1224,7 @@
   
   
     <li class="md-nav__item">
-      <a href="sponsor/" class="md-nav__link">
+      <a href="../sponsor/" class="md-nav__link">
         
   
   
@@ -1219,7 +1303,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/settings/" class="md-nav__link">
+      <a href="../reference/settings/" class="md-nav__link">
         
   
   
@@ -1306,7 +1390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="news/" class="md-nav__link">
+      <a href="../news/" class="md-nav__link">
         
   
   
@@ -1334,7 +1418,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2026-news/" class="md-nav__link">
+      <a href="../2026-news/" class="md-nav__link">
         
   
   
@@ -1362,7 +1446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2024-news/" class="md-nav__link">
+      <a href="../2024-news/" class="md-nav__link">
         
   
   
@@ -1390,7 +1474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2023-news/" class="md-nav__link">
+      <a href="../2023-news/" class="md-nav__link">
         
   
   
@@ -1418,7 +1502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2021-news/" class="md-nav__link">
+      <a href="../2021-news/" class="md-nav__link">
         
   
   
@@ -1446,7 +1530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2020-news/" class="md-nav__link">
+      <a href="../2020-news/" class="md-nav__link">
         
   
   
@@ -1474,7 +1558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2019-news/" class="md-nav__link">
+      <a href="../2019-news/" class="md-nav__link">
         
   
   
@@ -1502,7 +1586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2018-news/" class="md-nav__link">
+      <a href="../2018-news/" class="md-nav__link">
         
   
   
@@ -1530,7 +1614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2017-news/" class="md-nav__link">
+      <a href="../2017-news/" class="md-nav__link">
         
   
   
@@ -1558,7 +1642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2016-news/" class="md-nav__link">
+      <a href="../2016-news/" class="md-nav__link">
         
   
   
@@ -1586,7 +1670,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2015-news/" class="md-nav__link">
+      <a href="../2015-news/" class="md-nav__link">
         
   
   
@@ -1614,7 +1698,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2014-news/" class="md-nav__link">
+      <a href="../2014-news/" class="md-nav__link">
         
   
   
@@ -1642,7 +1726,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2013-news/" class="md-nav__link">
+      <a href="../2013-news/" class="md-nav__link">
         
   
   
@@ -1670,7 +1754,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2012-news/" class="md-nav__link">
+      <a href="../2012-news/" class="md-nav__link">
         
   
   
@@ -1698,7 +1782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2011-news/" class="md-nav__link">
+      <a href="../2011-news/" class="md-nav__link">
         
   
   
@@ -1726,7 +1810,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2010-news/" class="md-nav__link">
+      <a href="../2010-news/" class="md-nav__link">
         
   
   
@@ -1762,147 +1846,165 @@
             
             
           
-
           
-<main class="home">
-  <section class="hero">
-  <div class="container">
-    <img class="hero__logo" src="assets/gunicorn.svg" alt="Gunicorn" style="width: 350px;" />
-    <h1>Serve Python on the Web</h1>
-    <p class="hero__tagline">
-      Battle-tested. Production-ready. One command to serve your Python apps.
-    </p>
-    <div class="hero__buttons">
-      <a class="btn btn--primary" href="quickstart/">Get Started</a>
-      <a class="btn btn--secondary" href="https://github.com/benoitc/gunicorn">View on GitHub</a>
-    </div>
-    <div class="terminal">
-      <div class="terminal__header">
-        <span class="terminal__dot terminal__dot--red"></span>
-        <span class="terminal__dot terminal__dot--yellow"></span>
-        <span class="terminal__dot terminal__dot--green"></span>
-      </div>
-      <div class="terminal__body">
-        <span class="terminal__line"><span class="terminal__prompt">$ </span>pip install gunicorn</span>
-        <span class="terminal__line"><span class="terminal__prompt">$ </span>gunicorn myapp:app</span>
-        <span class="terminal__line terminal__comment"># Listening at http://127.0.0.1:8000</span>
-      </div>
-    </div>
-  </div>
-</section>
+            <div class="md-content" data-md-component="content">
+              
+                
 
-<section class="why">
-  <div class="container">
-    <h2>Why Gunicorn?</h2>
-    <div class="pillars">
-      <div class="pillar">
-        <h3>Production-Proven</h3>
-        <p>Trusted by thousands of companies. The pre-fork worker model handles traffic spikes gracefully.</p>
-      </div>
-      <div class="pillar">
-        <h3>Lightweight</h3>
-        <p>Minimal dependencies, simple configuration. Efficient from containers to bare metal.</p>
-      </div>
-      <div class="pillar">
-        <h3>Compatible</h3>
-        <p>Works with any WSGI or ASGI framework. Django, Flask, FastAPI—it just runs.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="frameworks">
-  <div class="container">
-    <h2>Works With Your Stack</h2>
-    <p class="frameworks__subtitle">WSGI and ASGI frameworks, no changes needed</p>
-    <div class="frameworks__list">
-      <span class="framework-tag">Django</span>
-      <span class="framework-tag">Flask</span>
-      <span class="framework-tag framework-tag--new">FastAPI</span>
-      <span class="framework-tag">Pyramid</span>
-      <span class="framework-tag framework-tag--new">Starlette</span>
-      <span class="framework-tag">Falcon</span>
-      <span class="framework-tag">Bottle</span>
-      <span class="framework-tag framework-tag--new">Quart</span>
-    </div>
-  </div>
-</section>
 
-<section class="workers">
-  <div class="container">
-    <h2>Choose Your Worker</h2>
-    <div class="workers__grid">
-      <a class="worker" href="design/#sync-workers">
-        <h3>Sync</h3>
-        <p>The default. One request per worker. Simple and predictable.</p>
-      </a>
-      <a class="worker" href="design/#async-workers">
-        <h3>Async (Gevent/Eventlet)</h3>
-        <p>Thousands of concurrent connections for I/O-bound workloads.</p>
-      </a>
-      <a class="worker" href="reference/settings/#threads">
-        <h3>Threads</h3>
-        <p>Multiple threads per worker. Balance concurrency and simplicity.</p>
-      </a>
-      <a class="worker" href="asgi/">
-        <h3>ASGI</h3>
-        <p>Native asyncio for FastAPI, Starlette, and async frameworks.</p>
-      </a>
-    </div>
-  </div>
-</section>
+  
 
-<section class="quick-links">
-  <div class="container">
-    <h2>Documentation</h2>
-    <div class="quick-links__grid">
-      <a class="quick-link" href="quickstart/">
-        <strong>Quickstart</strong>
-        <span>Get running in 5 minutes</span>
-      </a>
-      <a class="quick-link" href="deploy/">
-        <strong>Deployment</strong>
-        <span>Nginx, systemd, Docker</span>
-      </a>
-      <a class="quick-link" href="reference/settings/">
-        <strong>Settings</strong>
-        <span>All configuration options</span>
-      </a>
-      <a class="quick-link" href="faq/">
-        <strong>FAQ</strong>
-        <span>Common questions</span>
-      </a>
-    </div>
-  </div>
-</section>
 
-<section class="sponsors">
-  <div class="container">
-    <h2>Support</h2>
-    <p>Powering Python apps since 2010. Support continued development.</p>
-    <a class="btn btn--secondary" href="sponsor/">Become a Sponsor</a>
-    <div class="sponsors__list" style="margin-top: 2rem;">
-      <p style="font-size: 0.9rem; color: #666;">Sponsored by</p>
-      <a href="https://enki-multimedia.eu" target="_blank" rel="noopener">
-        <img src="assets/enki-multimedia.svg" alt="Enki Multimedia" style="height: 50px;" />
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href=".." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
       </a>
-    </div>
-  </div>
-</section>
+    </li>
+  
 
-<section class="home-footer">
-  <div class="container">
-    <h2>Join the Community</h2>
-    <p>Questions? Bugs? Ideas? We're here to help.</p>
-    <div class="home-footer__links">
-      <a href="https://github.com/benoitc/gunicorn/issues">GitHub Issues</a>
-      <a href="https://web.libera.chat/#gunicorn">#gunicorn on Libera</a>
-      <a href="community/">Contributing</a>
-    </div>
-  </div>
-</section>
-</main>
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../deploy/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Guides
+  </span>
 
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<p><span id="signals"></span></p>
+<h1 id="signal-handling">Signal Handling<a class="headerlink" href="#signal-handling" title="Permanent link">&para;</a></h1>
+<p>A quick reference to the signals handled by Gunicorn. This includes the signals
+used internally to coordinate with worker processes.</p>
+<h2 id="master-process">Master process<a class="headerlink" href="#master-process" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>QUIT</code>, <code>INT</code> &mdash; quick shutdown.</li>
+<li><code>TERM</code> &mdash; graceful shutdown; waits for workers to finish requests up to
+  <a href="../reference/settings/#graceful_timeout"><code>graceful_timeout</code></a>.</li>
+<li><code>HUP</code> &mdash; reload configuration, spawn new workers, and gracefully stop old
+  ones. If the app is not preloaded (see <a href="../reference/settings/#preload_app"><code>preload_app</code></a>)
+  the application code is reloaded too.</li>
+<li><code>TTIN</code> &mdash; increase worker count by one.</li>
+<li><code>TTOU</code> &mdash; decrease worker count by one.</li>
+<li><code>USR1</code> &mdash; reopen log files.</li>
+<li><code>USR2</code> &mdash; perform a binary upgrade. Send <code>TERM</code> to the old master afterwards
+  to stop it. This also reloads preloaded applications (see
+  <a href="#binary-upgrade">binary upgrades</a>).</li>
+<li><code>WINCH</code> &mdash; gracefully stop workers when Gunicorn runs as a daemon.</li>
+</ul>
+<h2 id="worker-process">Worker process<a class="headerlink" href="#worker-process" title="Permanent link">&para;</a></h2>
+<p>Workers rarely need direct signalling—if the master stays alive it will respawn
+workers automatically.</p>
+<ul>
+<li><code>QUIT</code>, <code>INT</code> &mdash; quick shutdown.</li>
+<li><code>TERM</code> &mdash; graceful shutdown.</li>
+<li><code>USR1</code> &mdash; reopen log files.</li>
+</ul>
+<h2 id="reload-the-configuration">Reload the configuration<a class="headerlink" href="#reload-the-configuration" title="Permanent link">&para;</a></h2>
+<p>Use <code>HUP</code> to reload Gunicorn on the fly:</p>
+<div class="highlight"><pre><span></span><code>2013-06-29 06:26:55 [20682] [INFO] Handling signal: hup
+2013-06-29 06:26:55 [20682] [INFO] Hang up: Master
+2013-06-29 06:26:55 [20703] [INFO] Booting worker with pid: 20703
+2013-06-29 06:26:55 [20702] [INFO] Booting worker with pid: 20702
+2013-06-29 06:26:55 [20688] [INFO] Worker exiting (pid: 20688)
+2013-06-29 06:26:55 [20687] [INFO] Worker exiting (pid: 20687)
+2013-06-29 06:26:55 [20689] [INFO] Worker exiting (pid: 20689)
+2013-06-29 06:26:55 [20704] [INFO] Booting worker with pid: 20704
+</code></pre></div>
+<p>Gunicorn reloads its settings, starts new workers, and gracefully shuts down the
+previous ones. If the app is not preloaded it reloads the application module as
+well.</p>
+<p><span id="binary-upgrade"></span></p>
+<h2 id="upgrading-to-a-new-binary-on-the-fly">Upgrading to a new binary on the fly<a class="headerlink" href="#upgrading-to-a-new-binary-on-the-fly" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Changed in 19.6.0</p>
+<p>PID files now follow the pattern <code>&lt;name&gt;.pid.2</code> instead of <code>&lt;name&gt;.pid.oldbin</code>.</p>
+</div>
+<p>You can replace the Gunicorn binary without downtime. Incoming requests remain
+served and preloaded applications reload.</p>
+<ol>
+<li>Replace the old binary and send <code>USR2</code> to the master. Gunicorn starts a new
+   master whose PID file ends with <code>.2</code> and spawns new workers.</li>
+</ol>
+<div class="highlight"><pre><span></span><code>PID USER      PR  NI  VIRT  RES  SHR S  %CPU %MEM    TIME+  COMMAND
+20844 benoitc   20   0 54808  11m 3352 S   0.0  0.1   0:00.36 gunicorn: master [test:app]
+20849 benoitc   20   0 54808 9.9m 1500 S   0.0  0.1   0:00.02 gunicorn: worker [test:app]
+20850 benoitc   20   0 54808 9.9m 1500 S   0.0  0.1   0:00.01 gunicorn: worker [test:app]
+20851 benoitc   20   0 54808 9.9m 1500 S   0.0  0.1   0:00.01 gunicorn: worker [test:app]
+20854 benoitc   20   0 55748  12m 3348 S   0.0  0.2   0:00.35 gunicorn: master [test:app]
+20859 benoitc   20   0 55748  11m 1500 S   0.0  0.1   0:00.01 gunicorn: worker [test:app]
+20860 benoitc   20   0 55748  11m 1500 S   0.0  0.1   0:00.00 gunicorn: worker [test:app]
+20861 benoitc   20   0 55748  11m 1500 S   0.0  0.1   0:00.01 gunicorn: worker [test:app]
+</code></pre></div>
+<ol>
+<li>Send <code>WINCH</code> to the old master to gracefully stop its workers.</li>
+</ol>
+<p>You can still roll back while the old master keeps its listen sockets:</p>
+<ol>
+<li>Send <code>HUP</code> to the old master to restart its workers without reloading the
+   config file.</li>
+<li>Send <code>TERM</code> to the new master to shut down its workers gracefully.</li>
+<li>Send <code>QUIT</code> to the new master to force it to exit.</li>
+</ol>
+<p>If the new workers linger, send <code>KILL</code> after the new master quits.</p>
+<p>To complete the upgrade, send <code>TERM</code> to the old master so only the new server
+continues running:</p>
+<div class="highlight"><pre><span></span><code>PID USER      PR  NI  VIRT  RES  SHR S  %CPU %MEM    TIME+  COMMAND
+20854 benoitc   20   0 55748  12m 3348 S   0.0  0.2   0:00.45 gunicorn: master [test:app]
+20859 benoitc   20   0 55748  11m 1500 S   0.0  0.1   0:00.02 gunicorn: worker [test:app]
+20860 benoitc   20   0 55748  11m 1500 S   0.0  0.1   0:00.02 gunicorn: worker [test:app]
+20861 benoitc   20   0 55748  11m 1500 S   0.0  0.1   0:00.01 gunicorn: worker [test:app]
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
           
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
@@ -1915,7 +2017,6 @@
         
       </main>
       
-
         <footer class="md-footer">
   
   <div class="md-footer-meta md-typeset">
@@ -1972,7 +2073,6 @@
   </div>
 </footer>
       
-
     </div>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
@@ -1984,12 +2084,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["content.code.copy", "content.code.annotate", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.path", "search.highlight", "search.suggest", "search.share", "toc.follow", "toc.integrate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy", "content.code.annotate", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.path", "search.highlight", "search.suggest", "search.share", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="assets/javascripts/toc-collapse.js"></script>
+        <script src="../assets/javascripts/toc-collapse.js"></script>
       
     
   </body>

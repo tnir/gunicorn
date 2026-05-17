@@ -8,42 +8,36 @@
       
       
       
-        <link rel="canonical" href="https://gunicorn.org/">
+        <link rel="canonical" href="https://gunicorn.org/quickstart/">
       
       
+        <link rel="prev" href="..">
       
-        <link rel="next" href="quickstart/">
+      
+        <link rel="next" href="../install/">
       
       
         
       
       
-      <link rel="icon" href="assets/gunicorn.svg">
+      <link rel="icon" href="../assets/gunicorn.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
-<title>Gunicorn - Python WSGI HTTP Server for UNIX</title>
-
+      
+        <title>Quickstart - Gunicorn</title>
+      
     
-
-      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
 
     
-<link rel="stylesheet" href="assets/stylesheets/home.css">
-<style>
-  /* Hide sidebar on desktop, keep drawer for mobile/tablet */
-  @media screen and (min-width: 76.25em) {
-    .md-sidebar--primary { display: none; }
-  }
-  .md-sidebar--secondary { display: none; }
-</style>
-
     
       
     
@@ -57,11 +51,11 @@
       
     
     
-      <link rel="stylesheet" href="styles/overrides.css">
+      <link rel="stylesheet" href="../styles/overrides.css">
     
-      <link rel="stylesheet" href="assets/stylesheets/home.css">
+      <link rel="stylesheet" href="../assets/stylesheets/home.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -85,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#quickstart" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -97,9 +96,9 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Gunicorn" class="md-header__button md-logo" aria-label="Gunicorn" data-md-component="logo">
+    <a href=".." title="Gunicorn" class="md-header__button md-logo" aria-label="Gunicorn" data-md-component="logo">
       
-  <img src="assets/gunicorn.svg" alt="logo">
+  <img src="../assets/gunicorn.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -116,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Gunicorn - Python WSGI HTTP Server
+              Quickstart
             
           </span>
         </div>
@@ -226,11 +225,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
         
   
   
@@ -247,11 +244,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="quickstart/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -271,7 +270,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="deploy/" class="md-tabs__link">
+        <a href="../deploy/" class="md-tabs__link">
           
   
   
@@ -291,7 +290,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="community/" class="md-tabs__link">
+        <a href="../community/" class="md-tabs__link">
           
   
   
@@ -309,7 +308,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="sponsor/" class="md-tabs__link">
+      <a href="../sponsor/" class="md-tabs__link">
         
   
   
@@ -330,7 +329,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="reference/settings/" class="md-tabs__link">
+        <a href="../reference/settings/" class="md-tabs__link">
           
   
   
@@ -350,7 +349,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="news/" class="md-tabs__link">
+        <a href="../news/" class="md-tabs__link">
           
   
   
@@ -372,14 +371,11 @@
     <div class="md-container" data-md-component="container">
       
       
-
         
       
-
       <main class="md-main" data-md-component="main">
         <div class="md-main__inner md-grid">
           
-  
             
               
               <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
@@ -395,9 +391,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Gunicorn" class="md-nav__button md-logo" aria-label="Gunicorn" data-md-component="logo">
+    <a href=".." title="Gunicorn" class="md-nav__button md-logo" aria-label="Gunicorn" data-md-component="logo">
       
-  <img src="assets/gunicorn.svg" alt="logo">
+  <img src="../assets/gunicorn.svg" alt="logo">
 
     </a>
     Gunicorn
@@ -421,17 +417,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -447,7 +436,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -456,26 +444,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -493,7 +486,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -508,10 +501,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="quickstart/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -527,6 +547,103 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-an-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create an Application
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-workers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add Workers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bind-to-a-port" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bind to a Port
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration File
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -539,7 +656,7 @@
   
   
     <li class="md-nav__item">
-      <a href="install/" class="md-nav__link">
+      <a href="../install/" class="md-nav__link">
         
   
   
@@ -567,7 +684,7 @@
   
   
     <li class="md-nav__item">
-      <a href="run/" class="md-nav__link">
+      <a href="../run/" class="md-nav__link">
         
   
   
@@ -595,7 +712,7 @@
   
   
     <li class="md-nav__item">
-      <a href="configure/" class="md-nav__link">
+      <a href="../configure/" class="md-nav__link">
         
   
   
@@ -682,7 +799,7 @@
   
   
     <li class="md-nav__item">
-      <a href="deploy/" class="md-nav__link">
+      <a href="../deploy/" class="md-nav__link">
         
   
   
@@ -710,7 +827,7 @@
   
   
     <li class="md-nav__item">
-      <a href="guides/docker/" class="md-nav__link">
+      <a href="../guides/docker/" class="md-nav__link">
         
   
   
@@ -738,7 +855,7 @@
   
   
     <li class="md-nav__item">
-      <a href="guides/http2/" class="md-nav__link">
+      <a href="../guides/http2/" class="md-nav__link">
         
   
   
@@ -766,7 +883,7 @@
   
   
     <li class="md-nav__item">
-      <a href="asgi/" class="md-nav__link">
+      <a href="../asgi/" class="md-nav__link">
         
   
   
@@ -794,7 +911,7 @@
   
   
     <li class="md-nav__item">
-      <a href="dirty/" class="md-nav__link">
+      <a href="../dirty/" class="md-nav__link">
         
   
   
@@ -822,7 +939,7 @@
   
   
     <li class="md-nav__item">
-      <a href="guides/gunicornc/" class="md-nav__link">
+      <a href="../guides/gunicornc/" class="md-nav__link">
         
   
   
@@ -850,7 +967,7 @@
   
   
     <li class="md-nav__item">
-      <a href="uwsgi/" class="md-nav__link">
+      <a href="../uwsgi/" class="md-nav__link">
         
   
   
@@ -878,7 +995,7 @@
   
   
     <li class="md-nav__item">
-      <a href="signals/" class="md-nav__link">
+      <a href="../signals/" class="md-nav__link">
         
   
   
@@ -906,7 +1023,7 @@
   
   
     <li class="md-nav__item">
-      <a href="instrumentation/" class="md-nav__link">
+      <a href="../instrumentation/" class="md-nav__link">
         
   
   
@@ -934,7 +1051,7 @@
   
   
     <li class="md-nav__item">
-      <a href="custom/" class="md-nav__link">
+      <a href="../custom/" class="md-nav__link">
         
   
   
@@ -962,7 +1079,7 @@
   
   
     <li class="md-nav__item">
-      <a href="design/" class="md-nav__link">
+      <a href="../design/" class="md-nav__link">
         
   
   
@@ -1049,7 +1166,7 @@
   
   
     <li class="md-nav__item">
-      <a href="community/" class="md-nav__link">
+      <a href="../community/" class="md-nav__link">
         
   
   
@@ -1077,7 +1194,7 @@
   
   
     <li class="md-nav__item">
-      <a href="faq/" class="md-nav__link">
+      <a href="../faq/" class="md-nav__link">
         
   
   
@@ -1105,7 +1222,7 @@
   
   
     <li class="md-nav__item">
-      <a href="sponsor/" class="md-nav__link">
+      <a href="../sponsor/" class="md-nav__link">
         
   
   
@@ -1140,7 +1257,7 @@
   
   
     <li class="md-nav__item">
-      <a href="sponsor/" class="md-nav__link">
+      <a href="../sponsor/" class="md-nav__link">
         
   
   
@@ -1219,7 +1336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/settings/" class="md-nav__link">
+      <a href="../reference/settings/" class="md-nav__link">
         
   
   
@@ -1306,7 +1423,7 @@
   
   
     <li class="md-nav__item">
-      <a href="news/" class="md-nav__link">
+      <a href="../news/" class="md-nav__link">
         
   
   
@@ -1334,7 +1451,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2026-news/" class="md-nav__link">
+      <a href="../2026-news/" class="md-nav__link">
         
   
   
@@ -1362,7 +1479,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2024-news/" class="md-nav__link">
+      <a href="../2024-news/" class="md-nav__link">
         
   
   
@@ -1390,7 +1507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2023-news/" class="md-nav__link">
+      <a href="../2023-news/" class="md-nav__link">
         
   
   
@@ -1418,7 +1535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2021-news/" class="md-nav__link">
+      <a href="../2021-news/" class="md-nav__link">
         
   
   
@@ -1446,7 +1563,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2020-news/" class="md-nav__link">
+      <a href="../2020-news/" class="md-nav__link">
         
   
   
@@ -1474,7 +1591,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2019-news/" class="md-nav__link">
+      <a href="../2019-news/" class="md-nav__link">
         
   
   
@@ -1502,7 +1619,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2018-news/" class="md-nav__link">
+      <a href="../2018-news/" class="md-nav__link">
         
   
   
@@ -1530,7 +1647,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2017-news/" class="md-nav__link">
+      <a href="../2017-news/" class="md-nav__link">
         
   
   
@@ -1558,7 +1675,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2016-news/" class="md-nav__link">
+      <a href="../2016-news/" class="md-nav__link">
         
   
   
@@ -1586,7 +1703,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2015-news/" class="md-nav__link">
+      <a href="../2015-news/" class="md-nav__link">
         
   
   
@@ -1614,7 +1731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2014-news/" class="md-nav__link">
+      <a href="../2014-news/" class="md-nav__link">
         
   
   
@@ -1642,7 +1759,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2013-news/" class="md-nav__link">
+      <a href="../2013-news/" class="md-nav__link">
         
   
   
@@ -1670,7 +1787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2012-news/" class="md-nav__link">
+      <a href="../2012-news/" class="md-nav__link">
         
   
   
@@ -1698,7 +1815,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2011-news/" class="md-nav__link">
+      <a href="../2011-news/" class="md-nav__link">
         
   
   
@@ -1726,7 +1843,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2010-news/" class="md-nav__link">
+      <a href="../2010-news/" class="md-nav__link">
         
   
   
@@ -1762,147 +1879,162 @@
             
             
           
-
           
-<main class="home">
-  <section class="hero">
-  <div class="container">
-    <img class="hero__logo" src="assets/gunicorn.svg" alt="Gunicorn" style="width: 350px;" />
-    <h1>Serve Python on the Web</h1>
-    <p class="hero__tagline">
-      Battle-tested. Production-ready. One command to serve your Python apps.
-    </p>
-    <div class="hero__buttons">
-      <a class="btn btn--primary" href="quickstart/">Get Started</a>
-      <a class="btn btn--secondary" href="https://github.com/benoitc/gunicorn">View on GitHub</a>
-    </div>
-    <div class="terminal">
-      <div class="terminal__header">
-        <span class="terminal__dot terminal__dot--red"></span>
-        <span class="terminal__dot terminal__dot--yellow"></span>
-        <span class="terminal__dot terminal__dot--green"></span>
-      </div>
-      <div class="terminal__body">
-        <span class="terminal__line"><span class="terminal__prompt">$ </span>pip install gunicorn</span>
-        <span class="terminal__line"><span class="terminal__prompt">$ </span>gunicorn myapp:app</span>
-        <span class="terminal__line terminal__comment"># Listening at http://127.0.0.1:8000</span>
-      </div>
-    </div>
-  </div>
-</section>
+            <div class="md-content" data-md-component="content">
+              
+                
 
-<section class="why">
-  <div class="container">
-    <h2>Why Gunicorn?</h2>
-    <div class="pillars">
-      <div class="pillar">
-        <h3>Production-Proven</h3>
-        <p>Trusted by thousands of companies. The pre-fork worker model handles traffic spikes gracefully.</p>
-      </div>
-      <div class="pillar">
-        <h3>Lightweight</h3>
-        <p>Minimal dependencies, simple configuration. Efficient from containers to bare metal.</p>
-      </div>
-      <div class="pillar">
-        <h3>Compatible</h3>
-        <p>Works with any WSGI or ASGI framework. Django, Flask, FastAPI—it just runs.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="frameworks">
-  <div class="container">
-    <h2>Works With Your Stack</h2>
-    <p class="frameworks__subtitle">WSGI and ASGI frameworks, no changes needed</p>
-    <div class="frameworks__list">
-      <span class="framework-tag">Django</span>
-      <span class="framework-tag">Flask</span>
-      <span class="framework-tag framework-tag--new">FastAPI</span>
-      <span class="framework-tag">Pyramid</span>
-      <span class="framework-tag framework-tag--new">Starlette</span>
-      <span class="framework-tag">Falcon</span>
-      <span class="framework-tag">Bottle</span>
-      <span class="framework-tag framework-tag--new">Quart</span>
-    </div>
-  </div>
-</section>
 
-<section class="workers">
-  <div class="container">
-    <h2>Choose Your Worker</h2>
-    <div class="workers__grid">
-      <a class="worker" href="design/#sync-workers">
-        <h3>Sync</h3>
-        <p>The default. One request per worker. Simple and predictable.</p>
-      </a>
-      <a class="worker" href="design/#async-workers">
-        <h3>Async (Gevent/Eventlet)</h3>
-        <p>Thousands of concurrent connections for I/O-bound workloads.</p>
-      </a>
-      <a class="worker" href="reference/settings/#threads">
-        <h3>Threads</h3>
-        <p>Multiple threads per worker. Balance concurrency and simplicity.</p>
-      </a>
-      <a class="worker" href="asgi/">
-        <h3>ASGI</h3>
-        <p>Native asyncio for FastAPI, Starlette, and async frameworks.</p>
-      </a>
-    </div>
-  </div>
-</section>
+  
 
-<section class="quick-links">
-  <div class="container">
-    <h2>Documentation</h2>
-    <div class="quick-links__grid">
-      <a class="quick-link" href="quickstart/">
-        <strong>Quickstart</strong>
-        <span>Get running in 5 minutes</span>
-      </a>
-      <a class="quick-link" href="deploy/">
-        <strong>Deployment</strong>
-        <span>Nginx, systemd, Docker</span>
-      </a>
-      <a class="quick-link" href="reference/settings/">
-        <strong>Settings</strong>
-        <span>All configuration options</span>
-      </a>
-      <a class="quick-link" href="faq/">
-        <strong>FAQ</strong>
-        <span>Common questions</span>
-      </a>
-    </div>
-  </div>
-</section>
 
-<section class="sponsors">
-  <div class="container">
-    <h2>Support</h2>
-    <p>Powering Python apps since 2010. Support continued development.</p>
-    <a class="btn btn--secondary" href="sponsor/">Become a Sponsor</a>
-    <div class="sponsors__list" style="margin-top: 2rem;">
-      <p style="font-size: 0.9rem; color: #666;">Sponsored by</p>
-      <a href="https://enki-multimedia.eu" target="_blank" rel="noopener">
-        <img src="assets/enki-multimedia.svg" alt="Enki Multimedia" style="height: 50px;" />
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href=".." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
       </a>
-    </div>
-  </div>
-</section>
+    </li>
+  
 
-<section class="home-footer">
-  <div class="container">
-    <h2>Join the Community</h2>
-    <p>Questions? Bugs? Ideas? We're here to help.</p>
-    <div class="home-footer__links">
-      <a href="https://github.com/benoitc/gunicorn/issues">GitHub Issues</a>
-      <a href="https://web.libera.chat/#gunicorn">#gunicorn on Libera</a>
-      <a href="community/">Contributing</a>
-    </div>
-  </div>
-</section>
-</main>
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
 
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="quickstart">Quickstart<a class="headerlink" href="#quickstart" title="Permanent link">&para;</a></h1>
+<p>Get a Python web application running with Gunicorn in 5 minutes.</p>
+<h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>gunicorn
+</code></pre></div>
+<h2 id="create-an-application">Create an Application<a class="headerlink" href="#create-an-application" title="Permanent link">&para;</a></h2>
+<p>Create <code>app.py</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Flask</label><label for="__tabbed_1_2">FastAPI</label><label for="__tabbed_1_3">Django</label><label for="__tabbed_1_4">Plain WSGI</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hello</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s2">&quot;Hello, World!&quot;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hello</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello, World!&quot;</span><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Django projects already have a WSGI application at <code>myproject/wsgi.py</code>.
+No additional code is needed.</p>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">app</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;Hello, World!&quot;</span>
+    <span class="n">start_response</span><span class="p">(</span><span class="s2">&quot;200 OK&quot;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">,</span> <span class="s2">&quot;text/plain&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;Content-Length&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
+    <span class="p">])</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="p">]</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="run">Run<a class="headerlink" href="#run" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>gunicorn<span class="w"> </span>app:app
+</code></pre></div>
+<p>For Django:</p>
+<div class="highlight"><pre><span></span><code>gunicorn<span class="w"> </span>myproject.wsgi
+</code></pre></div>
+<p>For FastAPI (ASGI):</p>
+<div class="highlight"><pre><span></span><code>gunicorn<span class="w"> </span>app:app<span class="w"> </span>--worker-class<span class="w"> </span>asgi
+</code></pre></div>
+<h2 id="add-workers">Add Workers<a class="headerlink" href="#add-workers" title="Permanent link">&para;</a></h2>
+<p>Use multiple workers to handle concurrent requests:</p>
+<div class="highlight"><pre><span></span><code>gunicorn<span class="w"> </span>app:app<span class="w"> </span>--workers<span class="w"> </span><span class="m">4</span>
+</code></pre></div>
+<p>A good starting point is <code>2 * CPU_CORES + 1</code> workers.</p>
+<h2 id="bind-to-a-port">Bind to a Port<a class="headerlink" href="#bind-to-a-port" title="Permanent link">&para;</a></h2>
+<p>By default Gunicorn binds to <code>127.0.0.1:8000</code>. Change it with:</p>
+<div class="highlight"><pre><span></span><code>gunicorn<span class="w"> </span>app:app<span class="w"> </span>--bind<span class="w"> </span><span class="m">0</span>.0.0.0:8080
+</code></pre></div>
+<h2 id="configuration-file">Configuration File<a class="headerlink" href="#configuration-file" title="Permanent link">&para;</a></h2>
+<p>Create <code>gunicorn.conf.py</code> for reusable settings:</p>
+<div class="highlight"><pre><span></span><code><span class="n">bind</span> <span class="o">=</span> <span class="s2">&quot;0.0.0.0:8000&quot;</span>
+<span class="n">workers</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">accesslog</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
+</code></pre></div>
+<p>Then run:</p>
+<div class="highlight"><pre><span></span><code>gunicorn<span class="w"> </span>app:app
+</code></pre></div>
+<p>Gunicorn automatically loads <code>gunicorn.conf.py</code> from the current directory.</p>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../run/">Run</a> - Full CLI reference and framework integration</li>
+<li><a href="../configure/">Configure</a> - Configuration file options</li>
+<li><a href="../deploy/">Deploy</a> - Production deployment with nginx and process managers</li>
+<li><a href="../reference/settings/">Settings</a> - Complete settings reference</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
           
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
@@ -1915,7 +2047,6 @@
         
       </main>
       
-
         <footer class="md-footer">
   
   <div class="md-footer-meta md-typeset">
@@ -1972,7 +2103,6 @@
   </div>
 </footer>
       
-
     </div>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
@@ -1984,12 +2114,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["content.code.copy", "content.code.annotate", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.path", "search.highlight", "search.suggest", "search.share", "toc.follow", "toc.integrate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy", "content.code.annotate", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.path", "search.highlight", "search.suggest", "search.share", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="assets/javascripts/toc-collapse.js"></script>
+        <script src="../assets/javascripts/toc-collapse.js"></script>
       
     
   </body>
