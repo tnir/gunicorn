@@ -2,4 +2,4 @@ sentence-transformers
 fastapi
 pydantic
 requests
-numpy
+numpy==2.4.5
