@@ -1,5 +1,5 @@
 sentence-transformers
 fastapi
-pydantic
+pydantic==2.13.5
 requests
 numpy
