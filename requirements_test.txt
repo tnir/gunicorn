@@ -1,6 +1,6 @@
 gevent
 coverage
-packaging
+packaging==26.3
 pytest>=9.0.3
 pytest-cov
 pytest-asyncio
