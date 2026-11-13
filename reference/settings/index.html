@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../assets/gunicorn.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -29,10 +29,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1065,6 +1065,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../faq/" class="md-nav__link">
         
   
@@ -1593,6 +1621,17 @@
     <span class="md-ellipsis">
       
         http_protocols
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#http2_cleartext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        http2_cleartext
       
     </span>
   </a>
@@ -2792,6 +2831,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#websocket_max_message_size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        websocket_max_message_size
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#http_parser" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3408,7 +3458,7 @@ regenerated during every documentation build.</p>
 <p class="admonition-title">Note</p>
 <p>Settings can be provided through the <code>GUNICORN_CMD_ARGS</code> environment
 variable. For example:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span><span class="nv">GUNICORN_CMD_ARGS</span><span class="o">=</span><span class="s2">&quot;--bind=127.0.0.1 --workers=3&quot;</span><span class="w"> </span>gunicorn<span class="w"> </span>app:app
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span><span class="nv">GUNICORN_CMD_ARGS</span><span class="o">=</span><span class="s2">"--bind=127.0.0.1 --workers=3"</span><span class="w"> </span>gunicorn<span class="w"> </span>app:app
 </code></pre></div>
 <p><em>Added in 19.7.</em></p>
 </div>
@@ -3510,8 +3560,25 @@ that can make requests can see the full exception and traceback!</p>
 <p><strong>Default:</strong> <code>[]</code></p>
 <p>Extends <a href="#reload">reload</a> option to also watch and reload on additional files
 (e.g., templates, configurations, specifications, etc.).</p>
+<p>Entries containing <code>*</code>, <code>?</code> or <code>[</code> are treated as glob patterns and
+are re-expanded on every reload check, so a file created after startup
+starts being watched without restarting gunicorn. Note that it is the
+first edit to that file which triggers a reload, not its creation. Use
+<code>**</code> to recurse, and keep patterns narrow: a recursive pattern over a
+large tree is walked once per check.</p>
+<p>Two things behave the way glob does, not the way a path does. <code>*</code> does
+not match dotfiles, so list <code>.env</code> literally rather than expecting
+<code>*</code> to find it. And a literal path that happens to contain <code>*</code>, <code>?</code>
+or <code>[</code> is read as a pattern, so it warns and matches nothing instead of
+failing outright the way a missing plain path does.</p>
+<p>Patterns are relative to the directory gunicorn is started from, not to
+chdir, which is applied later.</p>
 <div class="admonition info">
 <p class="admonition-title">Added in 19.8</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Changed in 26.1.0</p>
+<p>Glob patterns are supported.</p>
 </div>
 <h3 id="spew"><code>spew</code><a class="headerlink" href="#spew" title="Permanent link">&para;</a></h3>
 <p><strong>Command line:</strong> <code>--spew</code></p>
@@ -3586,9 +3653,9 @@ DirtyArbiter and the exiting DirtyWorker.</p>
 and implements the <code>init()</code>, <code>__call__()</code>, and <code>close()</code> methods.</p>
 <p>Example::</p>
 <div class="highlight"><pre><span></span><code>dirty_apps = [
-    &quot;myapp.ml:MLApp&quot;,           # All workers load this
-    &quot;myapp.images:ImageApp&quot;,    # All workers load this
-    &quot;myapp.heavy:HugeModel:2&quot;,  # Only 2 workers load this
+    "myapp.ml:MLApp",           # All workers load this
+    "myapp.images:ImageApp",    # All workers load this
+    "myapp.heavy:HugeModel:2",  # Only 2 workers load this
 ]
 </code></pre></div>
 <p>The per-app worker limit is useful for memory-intensive applications
@@ -3666,8 +3733,7 @@ are force killed.</p>
 <p>Valid protocols:</p>
 <ul>
 <li><code>h1</code> - HTTP/1.1 (default)</li>
-<li><code>h2</code> - HTTP/2 (requires TLS with ALPN)</li>
-<li><code>h3</code> - HTTP/3 (future, not yet implemented)</li>
+<li><code>h2</code> - HTTP/2 (TLS with ALPN, or cleartext via <code>http2_cleartext</code>)</li>
 </ul>
 <p>Examples::</p>
 <div class="highlight"><pre><span></span><code># HTTP/1.1 only (default, backward compatible)
@@ -3676,7 +3742,8 @@ are force killed.</p>
 # Prefer HTTP/2, fallback to HTTP/1.1
 --http-protocols=h2,h1
 
-# HTTP/2 only (reject HTTP/1.1 clients)
+# Offer HTTP/2 only. A client that does not select it over ALPN
+# is still served HTTP/1.1; there is no rejection.
 --http-protocols=h2
 </code></pre></div>
 <p>HTTP/2 requires:</p>
@@ -3687,11 +3754,45 @@ are force killed.</p>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>HTTP/2 cleartext (h2c) is not supported due to security concerns
-and lack of browser support.</p>
+<p>HTTP/2 cleartext (h2c) is disabled by default. Deployments behind
+a TLS-terminating proxy can enable prior-knowledge h2c with
+http2-prior-knowledge.</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">Added in 25.0.0</p>
+</div>
+<h3 id="http2_cleartext"><code>http2_cleartext</code><a class="headerlink" href="#http2_cleartext" title="Permanent link">&para;</a></h3>
+<p><strong>Command line:</strong> <code>--http2-cleartext STRING</code></p>
+<p><strong>Default:</strong> <code>'off'</code></p>
+<p>Accept HTTP/2 over cleartext TCP (h2c), and by which mechanism.</p>
+<p>Valid values are:</p>
+<ul>
+<li><code>off</code> (default) - no cleartext HTTP/2</li>
+<li><code>prior-knowledge</code> - serve connections that open with the HTTP/2
+  connection preface (<code>PRI * HTTP/2.0</code>), RFC 9113 section 3.4</li>
+<li><code>upgrade</code> - honour an HTTP/1.1 <code>Upgrade: h2c</code> request</li>
+<li><code>both</code> - accept either</li>
+</ul>
+<p>The mechanisms are listed separately on purpose: enabling one does not
+enable the other.</p>
+<p>With <code>prior-knowledge</code> alone, a trusted peer that does not send the
+preface is refused with 400, since it is expected to speak HTTP/2.
+With <code>upgrade</code> or <code>both</code> an HTTP/1 request is how an upgrade
+begins, so it is served normally.</p>
+<p>Only peers in <a href="#forwarded_allow_ips">forwarded-allow-ips</a> are considered. Everyone else
+is served HTTP/1.x exactly as if this were <code>off</code>. Anything else from
+a trusted peer on a prior-knowledge port (an HTTP/1.x request, a
+malformed or stalled preface) is rejected with a 400: such a peer is
+expected to speak HTTP/2, and a silent downgrade would only hide a
+misconfiguration.</p>
+<p>This is meant for deployments where TLS is terminated by a trusted
+proxy that speaks HTTP/2 upstream (Cloud Run, fly.io, a service-mesh
+sidecar). Do not expose a cleartext HTTP/2 port to the internet.</p>
+<p>Requires <code>h2</code> in http-protocols and the h2 library
+(<code>pip install gunicorn[http2]</code>). Ignored when TLS is configured;
+there HTTP/2 is negotiated by ALPN.</p>
+<div class="admonition info">
+<p class="admonition-title">Added in 26.2.0</p>
 </div>
 <h3 id="http2_max_concurrent_streams"><code>http2_max_concurrent_streams</code><a class="headerlink" href="#http2_max_concurrent_streams" title="Permanent link">&para;</a></h3>
 <p><strong>Command line:</strong> <code>--http2-max-concurrent-streams INT</code></p>
@@ -3756,32 +3857,104 @@ Protects against compression bombs and excessive memory use.</p>
 <p><strong>Command line:</strong> <code>--access-logformat STRING</code></p>
 <p><strong>Default:</strong> <code>'%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'</code></p>
 <p>The access log format.</p>
-<p>===========  ===========
-Identifier   Description
-===========  ===========
-h            remote address
-l            <code>'-'</code>
-u            user name (if HTTP Basic auth used)
-t            date of the request
-r            status line (e.g. <code>GET / HTTP/1.1</code>)
-m            request method
-U            URL path without query string
-q            query string
-H            protocol
-s            status
-B            response length
-b            response length or <code>'-'</code> (CLF format)
-f            referrer (note: header is <code>referer</code>)
-a            user agent
-T            request time in seconds
-M            request time in milliseconds
-D            request time in microseconds
-L            request time in decimal seconds
-p            process ID
-{header}i    request header
-{header}o    response header
-{variable}e  environment variable
-===========  ===========</p>
+<table>
+<thead>
+<tr>
+<th>Identifier</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>h</td>
+<td>remote client IP address (not overridden by proxy headers like X-Real-IP)</td>
+</tr>
+<tr>
+<td>l</td>
+<td><code>'-'</code> for compatibility with Common Log Format (CLF)</td>
+</tr>
+<tr>
+<td>u</td>
+<td>user name (if HTTP Basic auth used)</td>
+</tr>
+<tr>
+<td>t</td>
+<td>date of the request at logging time in CLF format</td>
+</tr>
+<tr>
+<td>r</td>
+<td>status line (e.g. <code>GET / HTTP/1.1</code>)</td>
+</tr>
+<tr>
+<td>m</td>
+<td>request method</td>
+</tr>
+<tr>
+<td>U</td>
+<td>URL path without query string</td>
+</tr>
+<tr>
+<td>q</td>
+<td>query string without a leading '?'</td>
+</tr>
+<tr>
+<td>H</td>
+<td>protocol</td>
+</tr>
+<tr>
+<td>s</td>
+<td>status</td>
+</tr>
+<tr>
+<td>B</td>
+<td>response length</td>
+</tr>
+<tr>
+<td>b</td>
+<td>response length or <code>'-'</code> (CLF format)</td>
+</tr>
+<tr>
+<td>f</td>
+<td>referrer (note: header is <code>referer</code>)</td>
+</tr>
+<tr>
+<td>a</td>
+<td>user agent</td>
+</tr>
+<tr>
+<td>T</td>
+<td>request duration in seconds</td>
+</tr>
+<tr>
+<td>M</td>
+<td>request duration in milliseconds</td>
+</tr>
+<tr>
+<td>D</td>
+<td>request duration in microseconds</td>
+</tr>
+<tr>
+<td>L</td>
+<td>request duration in decimal seconds</td>
+</tr>
+<tr>
+<td>p</td>
+<td>process ID</td>
+</tr>
+<tr>
+<td>{header}i</td>
+<td>request header</td>
+</tr>
+<tr>
+<td>{header}o</td>
+<td>response header</td>
+</tr>
+<tr>
+<td>{variable}e</td>
+<td>environment variable</td>
+</tr>
+</tbody>
+</table>
 <p>Use lowercase for header and environment variable names, and put
 <code>{...}x</code> names inside <code>%(...)s</code>. For example::</p>
 <div class="highlight"><pre><span></span><code>%({x-forwarded-for}i)s
@@ -4130,7 +4303,7 @@ Worker.</p>
 <h3 id="pre_request"><code>pre_request</code><a class="headerlink" href="#pre_request" title="Permanent link">&para;</a></h3>
 <p><strong>Default:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">pre_request</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
-    <span class="n">worker</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">worker</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div>
 <p>Called just before a worker processes the request.</p>
 <p>The callable needs to accept two instance variables for the Worker and
@@ -4256,7 +4429,7 @@ background.</p>
 <div class="highlight"><pre><span></span><code><span class="gp">$ </span>gunicorn<span class="w"> </span>-b<span class="w"> </span><span class="m">127</span>.0.0.1:8000<span class="w"> </span>--env<span class="w"> </span><span class="nv">FOO</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>test:app
 </code></pre></div>
 <p>Or in the configuration file:</p>
-<div class="highlight"><pre><span></span><code><span class="n">raw_env</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;FOO=1&quot;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="n">raw_env</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"FOO=1"</span><span class="p">]</span>
 </code></pre></div>
 <h3 id="pidfile"><code>pidfile</code><a class="headerlink" href="#pidfile" title="Permanent link">&para;</a></h3>
 <p><strong>Command line:</strong> <code>-p FILE</code>, <code>--pid FILE</code></p>
@@ -4359,9 +4532,9 @@ an IP address are treated as allowed, unconditionally.</p>
 In each case, we have a request from the remote address 134.213.44.18, and the default value of
 <code>secure_scheme_headers</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">secure_scheme_headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;X-FORWARDED-PROTOCOL&#39;</span><span class="p">:</span> <span class="s1">&#39;ssl&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;X-FORWARDED-PROTO&#39;</span><span class="p">:</span> <span class="s1">&#39;https&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;X-FORWARDED-SSL&#39;</span><span class="p">:</span> <span class="s1">&#39;on&#39;</span>
+    <span class="s1">'X-FORWARDED-PROTOCOL'</span><span class="p">:</span> <span class="s1">'ssl'</span><span class="p">,</span>
+    <span class="s1">'X-FORWARDED-PROTO'</span><span class="p">:</span> <span class="s1">'https'</span><span class="p">,</span>
+    <span class="s1">'X-FORWARDED-SSL'</span><span class="p">:</span> <span class="s1">'on'</span>
 <span class="p">}</span>
 </code></pre></div>
 <table>
@@ -4710,7 +4883,7 @@ it is not defined, the default is <code>1</code>.</p>
 <p><strong>Default:</strong> <code>'sync'</code></p>
 <p>The type of workers to use.</p>
 <p>The default class (<code>sync</code>) should handle most "normal" types of
-workloads. You'll want to read :doc:<code>design</code> for information on when
+workloads. You'll want to read <a href="../../design/#worker-types">worker-types</a> for information on when
 you might want to choose one of the other worker classes. Required
 libraries may be installed using setuptools' <code>extras_require</code> feature.</p>
 <p>A string referring to one of the following bundled classes:</p>
@@ -4770,7 +4943,10 @@ restarts to avoid all workers restarting at the same time.</p>
 <h3 id="timeout"><code>timeout</code><a class="headerlink" href="#timeout" title="Permanent link">&para;</a></h3>
 <p><strong>Command line:</strong> <code>-t INT</code>, <code>--timeout INT</code></p>
 <p><strong>Default:</strong> <code>30</code></p>
-<p>Workers silent for more than this many seconds are killed and restarted.</p>
+<p>Workers silent for more than this many seconds are killed and restarted.
+The master checks each worker's heartbeat file; a worker that does not
+update it within this timeout is considered silent. Idle workers keep
+updating their heartbeat while waiting for requests.</p>
 <p>Value is a positive number or 0. Setting it to 0 has the effect of
 infinite timeouts by disabling timeouts for all workers entirely.</p>
 <p>Generally, the default of thirty seconds should suffice. Only set this
@@ -4778,6 +4954,14 @@ noticeably higher if you're sure of the repercussions for sync workers.
 For the non sync workers it just means that the worker process is still
 communicating and is not tied to the length of time required to handle a
 single request.</p>
+<p>On HTTP/2 connections it also bounds a single stream: a request body
+that makes no progress for this long, or a response the peer stops
+reading for this long, is cancelled with <code>RST_STREAM</code>. 0 disables
+that too.</p>
+<div class="admonition info">
+<p class="admonition-title">Changed in 26.3.0</p>
+<p>Also bounds a stalled HTTP/2 stream.</p>
+</div>
 <h3 id="graceful_timeout"><code>graceful_timeout</code><a class="headerlink" href="#graceful_timeout" title="Permanent link">&para;</a></h3>
 <p><strong>Command line:</strong> <code>--graceful-timeout INT</code></p>
 <p><strong>Default:</strong> <code>30</code></p>
@@ -4797,6 +4981,12 @@ set this to a higher value.</p>
 <p class="admonition-title">Note</p>
 <p><code>sync</code> worker does not support persistent connections and will
 ignore this option.</p>
+</div>
+<p>On the <code>gthread</code> and <code>gevent</code> workers an HTTP/2 connection with no
+stream open is closed with <code>GOAWAY</code> after this many seconds.</p>
+<div class="admonition info">
+<p class="admonition-title">Changed in 26.3.0</p>
+<p>Also applies to idle HTTP/2 connections.</p>
 </div>
 <h3 id="asgi_loop"><code>asgi_loop</code><a class="headerlink" href="#asgi_loop" title="Permanent link">&para;</a></h3>
 <p><strong>Command line:</strong> <code>--asgi-loop STRING</code></p>
@@ -4822,6 +5012,9 @@ installing the uvloop package.</p>
 <li>on: Always run lifespan protocol (fail if unsupported)</li>
 <li>off: Never run lifespan protocol</li>
 </ul>
+<p>In <code>auto</code> and <code>on</code> mode, an app that sends
+<code>lifespan.startup.failed</code> stops gunicorn. With <code>on</code>, any failure
+to complete startup does.</p>
 <p>The lifespan protocol allows ASGI applications to run code at
 startup and shutdown. This is essential for frameworks like
 FastAPI that need to initialize database connections, caches,
@@ -4844,18 +5037,29 @@ need to increase this value.</p>
 <div class="admonition info">
 <p class="admonition-title">Added in 25.0.0</p>
 </div>
+<h3 id="websocket_max_message_size"><code>websocket_max_message_size</code><a class="headerlink" href="#websocket_max_message_size" title="Permanent link">&para;</a></h3>
+<p><strong>Command line:</strong> <code>--websocket-max-message-size INT</code></p>
+<p><strong>Default:</strong> <code>16777216</code></p>
+<p>Largest WebSocket message, in bytes, the <code>asgi</code> worker accepts.</p>
+<p>ASGI hands the application whole messages, so each message is held in
+memory until its last frame arrives. A frame or a fragmented message
+larger than this closes the connection with code 1009 (message too
+big, RFC 6455 section 7.4.1).</p>
+<p>Set to 0 for no limit.</p>
+<div class="admonition info">
+<p class="admonition-title">Added in 26.3.0</p>
+</div>
 <h3 id="http_parser"><code>http_parser</code><a class="headerlink" href="#http_parser" title="Permanent link">&para;</a></h3>
 <p><strong>Command line:</strong> <code>--http-parser STRING</code></p>
 <p><strong>Default:</strong> <code>'auto'</code></p>
-<p>HTTP parser implementation for ASGI workers.</p>
+<p>HTTP parser implementation.</p>
 <ul>
-<li>auto: Use H1CProtocol if gunicorn_h1c is available, else PythonProtocol (default)</li>
-<li>fast: Require H1CProtocol from gunicorn_h1c (fail if unavailable)</li>
-<li>python: Force pure Python PythonProtocol parser</li>
+<li>auto: Use gunicorn_h1c if it is available, else use the pure Python parser (default)</li>
+<li>fast: Require gunicorn_h1c (fail if unavailable)</li>
+<li>python: Force pure Python parser</li>
 </ul>
-<p>ASGI workers use callback-based parsing in data_received() for efficient
-incremental parsing. The gunicorn_h1c C extension provides significantly
-faster HTTP parsing using picohttpparser with SIMD optimizations.</p>
+<p>The gunicorn_h1c C extension provides significantly faster HTTP parsing
+using picohttpparser with SIMD optimizations.</p>
 <p>Install it with: pip install gunicorn[fast]</p>
 <div class="admonition info">
 <p class="admonition-title">Added in 25.0.0</p>
@@ -4955,10 +5159,10 @@ faster HTTP parsing using picohttpparser with SIMD optimizations.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.annotate", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.path", "search.highlight", "search.suggest", "search.share", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.annotate", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.path", "search.highlight", "search.suggest", "search.share", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../assets/javascripts/toc-collapse.js"></script>
       

@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../assets/gunicorn.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -29,10 +29,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1007,8 +1007,30 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#measure-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Measure performance
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http11-request-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTP/1.1 request handling
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1374,6 +1396,34 @@
     
   
     Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
   
 
     
@@ -2156,7 +2206,7 @@ gunicorn<span class="w"> </span>myapp:app<span class="w"> </span>--worker-class<
 <p>The ASGI worker provides:</p>
 <ul>
 <li><strong>HTTP/1.1</strong> with keepalive connections</li>
-<li><strong>HTTP/2</strong> with multiplexing and server push (requires SSL)</li>
+<li><strong>HTTP/2</strong> with multiplexing, over TLS or cleartext h2c behind a trusted proxy</li>
 <li><strong>WebSocket</strong> support for real-time applications</li>
 <li><strong>Lifespan protocol</strong> for startup/shutdown hooks</li>
 <li><strong>Optional fast HTTP parser</strong> via C extension for high throughput</li>
@@ -2171,7 +2221,7 @@ gunicorn<span class="w"> </span>myapp:app<span class="w"> </span>--worker-class<
 </code></pre></div>
 <p>Or in a configuration file:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># gunicorn.conf.py</span>
-<span class="n">worker_class</span> <span class="o">=</span> <span class="s2">&quot;asgi&quot;</span>
+<span class="n">worker_class</span> <span class="o">=</span> <span class="s2">"asgi"</span>
 </code></pre></div>
 <h3 id="event-loop">Event Loop<a class="headerlink" href="#event-loop" title="Permanent link">&para;</a></h3>
 <p>Control which asyncio event loop implementation to use:</p>
@@ -2237,10 +2287,10 @@ caches, or background tasks.</p>
 <span class="nd">@asynccontextmanager</span>
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">lifespan</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">FastAPI</span><span class="p">):</span>
     <span class="c1"># Startup: initialize resources</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting up...&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Starting up..."</span><span class="p">)</span>
     <span class="k">yield</span>
     <span class="c1"># Shutdown: cleanup resources</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shutting down...&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Shutting down..."</span><span class="p">)</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="n">lifespan</span><span class="o">=</span><span class="n">lifespan</span><span class="p">)</span>
 </code></pre></div>
@@ -2270,12 +2320,20 @@ configuration is required.</p>
     <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">receive_text</span><span class="p">()</span>
-        <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">send_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Echo: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">send_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Echo: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">(</span><span class="n">routes</span><span class="o">=</span><span class="p">[</span>
-    <span class="n">WebSocketRoute</span><span class="p">(</span><span class="s2">&quot;/ws&quot;</span><span class="p">,</span> <span class="n">websocket_endpoint</span><span class="p">),</span>
+    <span class="n">WebSocketRoute</span><span class="p">(</span><span class="s2">"/ws"</span><span class="p">,</span> <span class="n">websocket_endpoint</span><span class="p">),</span>
 <span class="p">])</span>
 </code></pre></div>
+<p>Each message is held in memory until its last frame arrives, so messages are
+limited to 16 MiB. A larger message closes the connection with code 1009. To
+change the limit:</p>
+<div class="highlight"><pre><span></span><code>gunicorn<span class="w"> </span>app:app<span class="w"> </span>-k<span class="w"> </span>asgi<span class="w"> </span>--websocket-max-message-size<span class="w"> </span><span class="m">67108864</span>
+</code></pre></div>
+<p>While the application does not call <code>receive()</code>, gunicorn stops reading from
+the socket once a few messages are waiting, so a fast client cannot grow the
+worker's memory.</p>
 <h2 id="production-deployment">Production Deployment<a class="headerlink" href="#production-deployment" title="Permanent link">&para;</a></h2>
 <h3 id="with-nginx-http-proxy">With Nginx (HTTP Proxy)<a class="headerlink" href="#with-nginx-http-proxy" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="k">upstream</span><span class="w"> </span><span class="s">gunicorn</span><span class="w"> </span><span class="p">{</span>
@@ -2299,7 +2357,7 @@ configuration is required.</p>
 <span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://gunicorn</span><span class="p">;</span>
 <span class="w">        </span><span class="kn">proxy_http_version</span><span class="w"> </span><span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
 <span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Upgrade</span><span class="w"> </span><span class="nv">$http_upgrade</span><span class="p">;</span>
-<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Connection</span><span class="w"> </span><span class="s">&quot;upgrade&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Connection</span><span class="w"> </span><span class="s">"upgrade"</span><span class="p">;</span>
 <span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Host</span><span class="w"> </span><span class="nv">$host</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -2331,7 +2389,7 @@ Use HTTP proxy for WebSocket endpoints.</p>
 <h3 id="recommended-settings">Recommended Settings<a class="headerlink" href="#recommended-settings" title="Permanent link">&para;</a></h3>
 <p>For production ASGI deployments:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># gunicorn.conf.py</span>
-<span class="n">worker_class</span> <span class="o">=</span> <span class="s2">&quot;asgi&quot;</span>
+<span class="n">worker_class</span> <span class="o">=</span> <span class="s2">"asgi"</span>
 <span class="n">workers</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># Number of worker processes</span>
 <span class="n">worker_connections</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># Max connections per worker</span>
 <span class="n">keepalive</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># Keepalive timeout</span>
@@ -2339,17 +2397,17 @@ Use HTTP proxy for WebSocket endpoints.</p>
 <span class="n">graceful_timeout</span> <span class="o">=</span> <span class="mi">30</span>  <span class="c1"># Graceful shutdown timeout</span>
 
 <span class="c1"># Performance tuning</span>
-<span class="n">asgi_loop</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span>  <span class="c1"># Use uvloop if available</span>
-<span class="n">asgi_lifespan</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span>  <span class="c1"># Auto-detect lifespan support</span>
+<span class="n">asgi_loop</span> <span class="o">=</span> <span class="s2">"auto"</span>  <span class="c1"># Use uvloop if available</span>
+<span class="n">asgi_lifespan</span> <span class="o">=</span> <span class="s2">"auto"</span>  <span class="c1"># Auto-detect lifespan support</span>
 </code></pre></div>
 <h2 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h2>
 <h3 id="fast-http-parser">Fast HTTP Parser<a class="headerlink" href="#fast-http-parser" title="Permanent link">&para;</a></h3>
 <p>For maximum performance, install the optional <code>gunicorn_h1c</code> C extension:</p>
 <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>gunicorn<span class="o">[</span>fast<span class="o">]</span>
 </code></pre></div>
-<p>This provides a high-performance HTTP parser using picohttpparser with SIMD
-optimizations, offering significant speedups for HTTP parsing compared to the
-pure Python implementation.</p>
+<p>This installs gunicorn_h1c 0.6.14 or later, a C HTTP/1 parser. It accepts and
+rejects the same requests as the pure Python parser, so you can switch between
+them without changing how requests are framed or which ones get a 400.</p>
 <p>The parser is automatically used when available (<code>--http-parser auto</code>), or you
 can explicitly require it:</p>
 <div class="highlight"><pre><span></span><code>gunicorn<span class="w"> </span>myapp:app<span class="w"> </span>--worker-class<span class="w"> </span>asgi<span class="w"> </span>--http-parser<span class="w"> </span>fast
@@ -2400,6 +2458,70 @@ gunicorn<span class="w"> </span>myapp:app<span class="w"> </span>--worker-class<
 </code></pre></div></p>
 </li>
 </ol>
+<h3 id="measure-performance">Measure performance<a class="headerlink" href="#measure-performance" title="Permanent link">&para;</a></h3>
+<p>Gunicorn ships the benchmark it is tuned with in <code>benchmarks/asgi/</code>. It runs
+the same app on gunicorn's ASGI worker (with each parser), on Uvicorn and on
+gunicorn with Uvicorn's worker, in alternating rounds, and reports requests
+per second, latency, CPU and memory for each.</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="w"> </span>-r<span class="w"> </span>benchmarks/asgi/requirements.txt
+python<span class="w"> </span>benchmarks/asgi/run.py<span class="w"> </span>--workloads<span class="w"> </span>small_keepalive<span class="w"> </span>stream_response
+
+<span class="c1"># compare with another revision, in the same alternating rounds</span>
+git<span class="w"> </span>worktree<span class="w"> </span>add<span class="w"> </span>/tmp/gunicorn-old<span class="w"> </span>&lt;commit&gt;
+python<span class="w"> </span>benchmarks/asgi/run.py<span class="w"> </span>--baseline-root<span class="w"> </span>/tmp/gunicorn-old
+</code></pre></div>
+<p><code>benchmarks/asgi/profile_requests.py</code> shows where one request spends its time,
+in process, without the network. See <code>benchmarks/asgi/README.md</code> for every
+workload and option.</p>
+<p>On an Apple M4 Pro with one worker, uvloop and the fast parser, gunicorn's
+ASGI worker serves small requests at about 95% of Uvicorn's rate, uploads at
+about the same rate, and streamed and 1 MiB responses at about 90%. Requests with
+many headers are the slowest case, at about 80%. Measure on your own hardware
+before you rely on these numbers.</p>
+<h2 id="http11-request-handling">HTTP/1.1 request handling<a class="headerlink" href="#http11-request-handling" title="Permanent link">&para;</a></h2>
+<p>Both parsers handle requests the same way. These are the answers you can see
+from a client:</p>
+<table>
+<thead>
+<tr>
+<th>Request</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Expect: 100-continue</code> on HTTP/1.1</td>
+<td><code>100 Continue</code> when the app first reads the body; none if the app answers first or the body came with the headers</td>
+</tr>
+<tr>
+<td>Malformed request line, header or chunked body</td>
+<td><code>400 Bad Request</code>, connection closed</td>
+</tr>
+<tr>
+<td><code>Transfer-Encoding</code> that does not end with <code>chunked</code>, such as <code>gzip</code> or <code>identity</code> alone</td>
+<td><code>400 Bad Request</code>, connection closed (RFC 9112 §6.3)</td>
+</tr>
+<tr>
+<td>Unknown transfer coding, such as <code>foo, chunked</code></td>
+<td><code>501 Not Implemented</code>, connection closed</td>
+</tr>
+<tr>
+<td>Request line over <code>limit_request_line</code></td>
+<td><code>414 URI Too Long</code></td>
+</tr>
+<tr>
+<td>Header section over the header limits</td>
+<td><code>431 Request Header Fields Too Large</code></td>
+</tr>
+</tbody>
+</table>
+<p>Error responses carry the standard reason phrase in the status line and the
+error text in the body.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A client that sends <code>Transfer-Encoding: identity</code> gets a 400. Drop the
+header: <code>identity</code> is no longer a transfer coding.</p>
+</div>
 <h2 id="comparison-with-other-asgi-servers">Comparison with Other ASGI Servers<a class="headerlink" href="#comparison-with-other-asgi-servers" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2445,15 +2567,18 @@ gunicorn<span class="w"> </span>myapp:app<span class="w"> </span>--worker-class<
 </table>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>HTTP/2 requires SSL/TLS and the h2 library. See <a href="../guides/http2/">HTTP/2 Support</a> for details.</p>
+<p>HTTP/2 requires the h2 library, and TLS unless you enable cleartext h2c
+behind a trusted proxy. See <a href="../guides/http2/">HTTP/2 Support</a> for details.</p>
 </div>
 <p>Gunicorn's ASGI worker provides the same process management, logging, and
 configuration capabilities you're familiar with from WSGI deployments.</p>
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <h3 id="lifespan-startup-failed">Lifespan startup failed<a class="headerlink" href="#lifespan-startup-failed" title="Permanent link">&para;</a></h3>
-<p>If you see "ASGI lifespan startup failed", your application may not properly
-implement the lifespan protocol. Either fix the application or set
-<code>--asgi-lifespan off</code>.</p>
+<p>If you see "ASGI lifespan startup failed", the application either sent
+<code>lifespan.startup.failed</code> (for example because a lifespan handler raised) or,
+with <code>--asgi-lifespan on</code>, did not complete the lifespan protocol. Gunicorn
+stops in both cases. Fix the application, or set <code>--asgi-lifespan off</code> (or
+<code>auto</code> for an app that does not implement lifespan).</p>
 <h3 id="connection-limits">Connection limits<a class="headerlink" href="#connection-limits" title="Permanent link">&para;</a></h3>
 <p>If you're hitting connection limits, increase <code>--worker-connections</code> or add
 more workers with <code>--workers</code>.</p>
@@ -2640,10 +2765,10 @@ Run <code>docker compose up -d --build</code> followed by <code>pytest tests/ -v
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy", "content.code.annotate", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.path", "search.highlight", "search.suggest", "search.share", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy", "content.code.annotate", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.path", "search.highlight", "search.suggest", "search.share", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../assets/javascripts/toc-collapse.js"></script>
       
