@@ -1,5 +1,5 @@
 gevent
-coverage
+coverage==7.17.4
 packaging
 pytest>=9.0.3
 pytest-cov
